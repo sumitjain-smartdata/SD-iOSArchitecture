@@ -5,7 +5,6 @@
 //  Created by Amit on 23/02/18.
 //  Copyright © 2018 smartData. All rights reserved.
 //
-
 import Foundation
 import UIKit
 
@@ -73,7 +72,7 @@ extension APIService {
         var request:URLRequest? = nil
         
         switch method {
-        
+            
         case .GET:
             
             if let params = parameters,params.count > 0 {
@@ -100,7 +99,7 @@ extension APIService {
                     for (key, value) in params {
                         data.append("--\(boundary)\r\n".nsdata)
                         data.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".nsdata)
-                        data.append("\((value as AnyObject).description)\r\n".nsdata)
+                        data.append("\((value as AnyObject).description ?? "")\r\n".nsdata)
                     }
                 }
                 for file in images {

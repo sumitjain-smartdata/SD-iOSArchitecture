@@ -16,24 +16,24 @@ public typealias FBLoginResponse = ([NSObject : AnyObject]?, NSError?) -> Void
 public class SocialLogin: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     private var _googleResponseHandler: GoogleLoginResponse?
     
-    private static var _sInstance : FXSocialLogin!
+    private static var _sInstance : SocialLogin!
     
-    public class func getInstance() -> FXSocialLogin {
+    public class func getInstance() -> SocialLogin {
         if(_sInstance == nil) {
-            _sInstance = FXSocialLogin()
+            _sInstance = SocialLogin()
         }
         
         return _sInstance
     }
 
     public class func loginWithGoogleWithCallBackResponse(completionHandler: @escaping GoogleLoginResponse) {
-        let socialLogin = FXSocialLogin.getInstance()
+        let socialLogin = SocialLogin.getInstance()
         socialLogin._googleResponseHandler = completionHandler
         
         let signIn = GIDSignIn.sharedInstance()
-        signIn?.clientID = FXApplicationConstants.googleClientID()
+//        signIn?.clientID = ApplicationConstants.googleClientID()
         signIn?.shouldFetchBasicProfile = true
-        signIn?.scopes = [FXWebRequestURL.getGooglePlusAuthURL()]
+//        signIn?.scopes = [FXWebRequestURL.getGooglePlusAuthURL()]
         signIn?.delegate = socialLogin
         signIn?.uiDelegate = socialLogin
         signIn?.signIn()
@@ -48,14 +48,14 @@ public class SocialLogin: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     public class func loginWithFacebookAtViewController(vc: UIViewController!, completionHandler: FBLoginResponse) {
         if vc != nil {
             if (FBSDKAccessToken.currentAccessToken() != nil) {
-                ULSocialLogin._getFBUserWithCompletionHandler(completionHandler)
+                SocialLogin._getFBUserWithCompletionHandler(completionHandler)
             } else {
                 FBSDKLoginManager().logInWithReadPermissions(["email", "public_profile"], fromViewController: vc, handler: { (result, error) -> Void in
                     if error == nil {
                         if result.isCancelled {
                             completionHandler(nil, NSError(domain: "Cancelled by user", code: 0, userInfo: nil))
                         } else {
-                            ULSocialLogin._getFBUserWithCompletionHandler(completionHandler)
+                            SocialLogin._getFBUserWithCompletionHandler(completionHandler)
                         }
                     }
                 })
@@ -72,7 +72,7 @@ public class SocialLogin: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     //MARK:- GIDSignInUIDelegate
     public func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
-        var viewCntrl = FXSharedAppDelegate?.window?.rootViewController
+        var viewCntrl = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController
         
         while (viewCntrl?.presentedViewController != nil) {
             viewCntrl = viewCntrl!.presentedViewController;
