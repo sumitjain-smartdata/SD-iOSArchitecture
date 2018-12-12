@@ -53,7 +53,8 @@ Architecture is following MVC pattern using Swift Language with version 4.0 and 
 ## How to use:
 
 ### SDSocialLogin: Platform to login with Facebook and Google
-    Login with FB: add FBSDKLoginKit through pod and install pod. then uncomment following lines
+Login with FB: add FBSDKLoginKit through pod and install pod. then uncomment following lines
+    
     ```swift
     import FBSDKLoginKit
     public typealias FBLoginResponse = ([NSObject : AnyObject]?, NSError?) -> Void
@@ -98,7 +99,7 @@ Architecture is following MVC pattern using Swift Language with version 4.0 and 
     
     ```
     
-    Write following lines of code in your controller to login via facebook
+Write following lines of code in your controller to login via facebook
     
     ```swift
         SocialLogin.loginWithFacebookAtViewController(vc: self) { (user, error) in
@@ -111,7 +112,8 @@ Architecture is following MVC pattern using Swift Language with version 4.0 and 
 
     ```
 
-    Login with Google: add GoogleSignIn through pod and install pod. then uncomment following lines
+Login with Google: add GoogleSignIn through pod and install pod. then uncomment following lines
+        
         ```swift
         import GoogleSignIn
         public typealias GoogleLoginResponse = (GIDGoogleUser?, NSError?) -> Void
@@ -165,7 +167,7 @@ Architecture is following MVC pattern using Swift Language with version 4.0 and 
 
         ```
 
-        Write following lines of code in your controller to login via google and also pass your google client id and scope in the methods as mentioned above.
+Write following lines of code in your controller to login via google and also pass your google client id and scope in the methods as mentioned above.
 
         ```swift
         SocialLogin.loginWithGoogleWithCallBackResponse ({ (user, error) in
