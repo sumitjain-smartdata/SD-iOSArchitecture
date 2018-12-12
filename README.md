@@ -1,3 +1,5 @@
+![smartData: Scaling Expectations in Swift](https://www.smartdatainc.com/wp-content/uploads/2018/09/logo.png)
+
 # SD-iOSArchitecture
 To kick start iOS project at smart Data
 
